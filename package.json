@@ -7,7 +7,8 @@
     "electron-is-dev": "^1.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "wilma": "^1.0.7"
   },
   "scripts": {
     "start": "react-scripts start",
