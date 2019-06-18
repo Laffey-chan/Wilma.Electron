@@ -14,7 +14,7 @@ import React from 'react';
          return(
              <form onSubmit={this.handleSubmit}>
                  <input id="Username" type="text" placeholder='Käyttäjänimi' value={this.state.username} onChange={this.handleChange}></input>
-                 <input id="Password" type="text" placeholder='Salasana' value={this.state.password} onChange={this.handleChange}></input>
+                 <input id="Password" type="password" placeholder='Salasana' value={this.state.password} onChange={this.handleChange}></input>
                  <input type="submit" value="Kirjaudu"/>
              </form>
          );

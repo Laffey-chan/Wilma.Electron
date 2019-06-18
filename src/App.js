@@ -1,5 +1,5 @@
 import React from 'react';
-import wilma from 'wilma';
+import axios from 'axios';
 import './App.css';
 import MenuBar from './components/MenuBar';
 import Login from './components/Login';
@@ -21,15 +21,23 @@ class App extends React.Component {
     );
   }
 
-  async getSID(userName, passWord) {
-    var newSID = await wilma.LoginWilma(userName, passWord);
-    alert(newSID);
-    if (newSID !== ''){
-      this.setState({ SID: newSID, LoggedIn: true });
-      alert("Kirjautuminen onnistui \n SID: " + newSID);
-    }
-    else
-        alert("Kirjautuminen epäonnistui");
+  getSID(userName, passWord) {
+    axios('http://localhost:3001/login', {
+      method: 'post',
+      data: {
+        usename: userName,
+        password: passWord
+      },
+      headers: {'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'},
+      withCredentials: false
+    }).then((res) => {
+      if(res.data === ''){
+        alert('Kirjautuminen epäonnistui');
+      }else{
+         this.setState({SID: res.data, LoggedIn:true});
+         alert('Kirjautuminen onnistui \n SID: ' + this.state.SID + '\n Kirjauduttu: ' + this.state.LoggedIn);
+      }
+    })
   }
 
 }
