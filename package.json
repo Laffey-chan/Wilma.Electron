@@ -16,7 +16,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-start": "electron .",
-    "app-start": "concurrently \"npm start\" \" cd BackEnd && node backend \" \"wait-on http://localhost:3000 && npm run electron-start\""
+    "app-start": "concurrently \"npm start\" \" cd BackEnd && nodemon backend \" \"wait-on http://localhost:3000 && npm run electron-start\""
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {

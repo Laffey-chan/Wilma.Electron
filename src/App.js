@@ -22,14 +22,9 @@ class App extends React.Component {
   }
 
   getSID(userName, passWord) {
-    axios('http://localhost:3001/login', {
-      method: 'post',
-      data: {
-        usename: userName,
-        password: passWord
-      },
-      headers: {'Access-Control-Allow-Origin' : '*', 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'},
-      withCredentials: false
+    axios.post('/login', {
+      username: userName,
+      password: passWord
     }).then((res) => {
       if(res.data === ''){
         alert('Kirjautuminen epäonnistui');
@@ -39,7 +34,6 @@ class App extends React.Component {
       }
     })
   }
-
 }
 
 export default App;

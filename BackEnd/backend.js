@@ -7,18 +7,16 @@ const app = express();
 const hostname = 'localhost';
 const port = 3001;
 
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(cors({
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }));
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+app.use(cors());
 
 app.post('/login', (req, res)=>{
     async function Response(){
+        console.log(req.body)
         var username = req.body.username;
         var password = req.body.password;
-
-        var SID = await wilma.LoginWilma('gr189354', 'stPCUyAfA');
+        var SID = await wilma.LoginWilma(username, password);
 
         res.send(SID);
     }
