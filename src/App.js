@@ -4,6 +4,7 @@ import './App.css';
 import MenuBar from './components/MenuBar';
 import Login from './components/Login';
 import Schedule from './components/Schedule';
+import MessageList from './components/MessageList';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,13 +15,14 @@ class App extends React.Component {
   render() {
     let main;
     if (!this.state.LoggedIn)
-      main = <Login getSID={this.getSID.bind(this)}></Login>
+      main = [<Login getSID={this.getSID.bind(this)}></Login>]
       else
-        main = <Schedule SID={this.state.SID}></Schedule>
+        main = [<MessageList SID={this.state.SID}></MessageList>, <Schedule SID={this.state.SID}></Schedule>]
     return (
       <div className="App">
         <MenuBar></MenuBar>
-          {main}
+          {main[0]}
+          {main[1]}
       </div>
     );
   }

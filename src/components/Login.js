@@ -13,7 +13,7 @@ import React from 'react';
      render(){
          return(
              <form onSubmit={this.handleSubmit}>
-                 <input id="Username" type="text" placeholder='Käyttäjänimi' value={this.state.username} onChange={this.handleChange}></input>
+                 <input id="Username" type="text" placeholder='Käyttäjänimi' value={this.state.username} onChange={this.handleChange} disabled={false}></input>
                  <input id="Password" type="password" placeholder='Salasana' value={this.state.password} onChange={this.handleChange}></input>
                  <input type="submit" value="Kirjaudu"/>
              </form>
@@ -21,6 +21,7 @@ import React from 'react';
      }
     login = () =>{
         this.props.getSID(this.state.username, this.state.password);
+        this.setState({username: this.state.username, password: this.state.password})
     }
     handleSubmit(event){
         this.login();
@@ -28,6 +29,7 @@ import React from 'react';
      }
      handleChange(event){
         if(event.target.id === "Username"){
+            console.log('ree');
             this.setState({username: event.target.value});
         }
         else if(event.target.id === "Password"){
