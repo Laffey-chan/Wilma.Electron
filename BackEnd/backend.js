@@ -13,12 +13,20 @@ app.use(cors());
 
 app.post('/login', (req, res)=>{
     async function Response(){
-        console.log(req.body)
         var username = req.body.username;
         var password = req.body.password;
         var SID = await wilma.LoginWilma(username, password);
-
+        
         res.send(SID);
+    }
+    Response();
+});
+app.post('/messageList', (req, res) =>{
+    async function Response(){
+        let SID = req.body.SID;
+        let messageList = await wilma.GetMessages(SID);
+        
+        res.send(messageList);
     }
     Response();
 });
