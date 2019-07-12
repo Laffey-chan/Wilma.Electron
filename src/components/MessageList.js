@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { thisExpression } from '@babel/types';
 
 class MessageList extends React.Component {
     constructor(props) {
@@ -12,6 +13,8 @@ class MessageList extends React.Component {
 
                 console.log(this.state.messages[0]);
             })
+        this.increaseMessageIndex = this.increaseMessageIndex.bind(this);
+        this.decreaseMessageIndex = this.decreaseMessageIndex.bind(this);
     }
 
     async componentDidMount() {
@@ -24,16 +27,17 @@ class MessageList extends React.Component {
             let upButton
             console.log(this.state.messages.length)
             for (let i = this.state.messageIndex; i < this.state.messageIndex + 5; i++) {
-                rows.push(<p>{this.state.messages[i].Subject}</p>);
+                if(i < this.state.messages.length)
+                rows.push(<p>{this.state.messages[i].Subject}</p>)
             }
             if (this.state.messageIndex <= 0)
                 downButton = <button disabled={true}>alas</button>
             else
-                downButton = <button >alas</button>
+                downButton = <button onClick={this.decreaseMessageIndex}>alas</button>
             if (this.state.messageIndex + 5 >= this.state.messages.length)
                 upButton = <button disabled={true}>ylös</button>
             else
-                upButton = <button >ylös</button>
+                upButton = <button onClick={this.increaseMessageIndex}>ylös</button>
             return (
                 <div>
                     <p>{Math.ceil((this.state.messageIndex + 5)/5)} / {Math.ceil(this.state.messages.length/5)}</p>
@@ -44,6 +48,12 @@ class MessageList extends React.Component {
         }
         else
             return null;
+    }
+    increaseMessageIndex() {
+        this.setState({messageIndex: this.state.messageIndex + 5});
+    }
+    decreaseMessageIndex(){
+        this.setState({messageIndex: this.state.messageIndex - 5})
     }
 }
 export default MessageList;
