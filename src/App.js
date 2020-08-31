@@ -5,6 +5,7 @@ import MenuBar from './components/MenuBar';
 import Login from './components/Login';
 import Schedule from './components/Schedule';
 import MessageList from './components/MessageList';
+import fetch from 'node-fetch';
 
 class App extends React.Component {
   constructor(props) {
@@ -28,6 +29,13 @@ class App extends React.Component {
   }
 
   getSID(userName, passWord) {
+    fetch('https://gradia.inschool.fi/login', {method: 'POST', body:{
+      Login:'',
+      Password: '',
+      format: 'json'
+    }}).then(res => res.json()).then(body => {
+      console.log(body);
+    })
     axios.post('/login', {
       username: userName,
       password: passWord
